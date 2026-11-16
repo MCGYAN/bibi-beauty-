@@ -229,8 +229,8 @@ function ShopContent() {
     <main className="min-h-screen bg-brand-cream">
       <PageHero
         eyebrow={`${SITE_NAME} Collection`}
-        title="The Edit"
-        subtitle="Makeup, skincare and essentials — your softest glow starts here."
+        title="Shop"
+        subtitle="Waist trainers, BBL corsets, seamless shapewear and fajas, for the fit you want."
       />
 
       <div className="lg:hidden glass-cream border-b border-brand-rose/15 py-3 px-4 sticky top-16 z-30">
@@ -253,7 +253,7 @@ function ShopContent() {
               <div className="lg:sticky lg:top-28">
                 <div className="p-6 lg:p-0">
                   <div className="flex items-center justify-between mb-6 lg:hidden">
-                    <h2 className="font-serif text-xl text-brand-plum">Refine your look</h2>
+                    <h2 className="font-serif text-xl text-brand-plum">Filters</h2>
                     <button
                       onClick={() => setIsFilterOpen(false)}
                       className="w-10 h-10 flex items-center justify-center rounded-full text-brand-plum hover:bg-brand-latte/60"

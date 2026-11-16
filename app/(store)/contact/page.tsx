@@ -7,6 +7,7 @@ import {
   CONTACT_PHONE_DISPLAY,
   CONTACT_PHONE_SECONDARY_DISPLAY,
   BUSINESS_ADDRESS,
+  BUSINESS_CITY,
   WHATSAPP_URL,
 } from '@/lib/site-brand';
 import { useState, useEffect } from 'react';
@@ -103,8 +104,8 @@ export default function ContactPage() {
   const contactAddress = getSetting('contact_address') || BUSINESS_ADDRESS;
 
   const heroTitle = pageContent?.title || `Contact ${SITE_NAME}`;
-  const heroSubtitle = pageContent?.subtitle || 'Order makeup & skincare — we reply fast on WhatsApp.';
-  const heroContent = pageContent?.content || 'Call, WhatsApp or send a message. We are here to help you find your glow.';
+  const heroSubtitle = pageContent?.subtitle || 'Order shapewear on WhatsApp. We help with size and style.';
+  const heroContent = pageContent?.content || 'WhatsApp or send a message. We help you pick the right waist trainer, BBL corset or seamless piece.';
 
   const waLink = WHATSAPP_URL;
   const telLink = `tel:${CONTACT_PHONE}`;
@@ -115,7 +116,9 @@ export default function ContactPage() {
       title: 'Call Us',
       value: contactPhone,
       link: telLink,
-      description: `Also: ${CONTACT_PHONE_SECONDARY_DISPLAY}`,
+      description: CONTACT_PHONE_SECONDARY_DISPLAY
+        ? `Also: ${CONTACT_PHONE_SECONDARY_DISPLAY}`
+        : 'During business hours',
     },
     {
       icon: 'ri-mail-line',
@@ -136,26 +139,26 @@ export default function ContactPage() {
       title: 'Visit Us',
       value: contactAddress,
       link: 'https://maps.google.com',
-      description: 'Darkuman, Fadama Junction',
+      description: BUSINESS_CITY,
     }
   ];
 
   const faqs = [
     {
       question: 'How do I place an order?',
-      answer: `Call ${CONTACT_PHONE_DISPLAY}, WhatsApp us, or add items to your cart and checkout. Not sure what suits your skin or look? Message us first — we will guide you.`,
+      answer: `WhatsApp us, or add items to your cart and checkout. Not sure which waist trainer or BBL corset fits your look? Message us first and we will guide you.`,
     },
     {
       question: 'Do you deliver nationwide?',
-      answer: 'Yes. We deliver across Ghana. Standard delivery usually takes 2-5 business days depending on your location.',
+      answer: 'Yes. We deliver across Ghana. Standard delivery usually takes 2 to 5 business days depending on your location.',
     },
     {
       question: 'Can I pay on delivery?',
-      answer: 'Yes — pay on delivery is available so you can shop with confidence and glow without the stress.',
+      answer: 'Yes, pay on delivery is available on eligible orders.',
     },
     {
       question: 'Where are you located?',
-      answer: 'We are at Darkuman, Fadama Junction, Accra. Visit us or order for delivery.',
+      answer: `We are at ${BUSINESS_ADDRESS}. Visit us or order for delivery.`,
     },
   ];
 
@@ -164,7 +167,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Get In Touch"
         title={`Contact ${SITE_NAME}`}
-        subtitle="Order makeup & skincare — we reply fast on WhatsApp."
+        subtitle={heroSubtitle}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -356,7 +359,7 @@ export default function ContactPage() {
               </div>
               <div className="flex items-center gap-2">
                 <i className="ri-time-line text-blue-700"></i>
-                <span>Mon-Sat: 9am-6pm</span>
+                <span>Mon to Sat: 9am to 6pm</span>
               </div>
             </div>
             <div className="mt-8 rounded-2xl overflow-hidden border border-brand-gold/20 shadow-md">

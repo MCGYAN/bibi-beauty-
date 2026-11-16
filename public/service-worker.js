@@ -1,10 +1,33 @@
 // Service Worker — update CACHE_VERSION when deploying
-const CACHE_VERSION = 'app-v5-bibi-beauty';
-const LOGO_PATH = '/logo.png?v=5';
+const CACHE_VERSION = 'app-v4-shapewearboss-4products';
+const LOGO_PATH = '/logo.png?v=1';
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;
 const IMAGE_CACHE = `images-${CACHE_VERSION}`;
 const API_CACHE = `api-${CACHE_VERSION}`;
+
+// Local/dev hosts: never cache — stale /_next/static chunks fight Fast Refresh
+const IS_LOCAL_HOST =
+  self.location.hostname === 'localhost' ||
+  self.location.hostname === '127.0.0.1' ||
+  self.location.hostname === '[::1]';
+
+if (IS_LOCAL_HOST) {
+  self.addEventListener('install', (event) => {
+    event.waitUntil(self.skipWaiting());
+  });
+  self.addEventListener('activate', (event) => {
+    event.waitUntil(
+      (async () => {
+        const keys = await caches.keys();
+        await Promise.all(keys.map((key) => caches.delete(key)));
+        await self.registration.unregister();
+        const clientsList = await self.clients.matchAll({ type: 'window' });
+        clientsList.forEach((client) => client.navigate(client.url));
+      })()
+    );
+  });
+}
 
 // Core app shell files to pre-cache
 const STATIC_ASSETS = [
@@ -34,7 +57,7 @@ async function trimCache(cacheName, maxItems) {
 }
 
 // Install: pre-cache static assets
-self.addEventListener('install', (event) => {
+if (!IS_LOCAL_HOST) self.addEventListener('install', (event) => {
   console.log('[SW] Installing STOREFRONT v2.2...');
   event.waitUntil(
     caches.open(STATIC_CACHE)
@@ -51,7 +74,7 @@ self.addEventListener('install', (event) => {
 });
 
 // Activate: clean old caches
-self.addEventListener('activate', (event) => {
+if (!IS_LOCAL_HOST) self.addEventListener('activate', (event) => {
   console.log('[SW] Activating STOREFRONT v2.2...');
   event.waitUntil(
     caches.keys()
@@ -70,7 +93,7 @@ self.addEventListener('activate', (event) => {
 });
 
 // Fetch: smart caching strategies
-self.addEventListener('fetch', (event) => {
+if (!IS_LOCAL_HOST) self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 

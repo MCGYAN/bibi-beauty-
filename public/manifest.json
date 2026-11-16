@@ -1,16 +1,16 @@
 {
-  "name": "Bibi Beauty Store",
-  "short_name": "Bibi Beauty",
-  "description": "Glow Like You Mean It.",
+  "name": "ShapewearBoss",
+  "short_name": "ShapewearBoss",
+  "description": "Shape the Confidence.",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#FFF7FB",
-  "theme_color": "#E2187A",
+  "background_color": "#E8D5C8",
+  "theme_color": "#641D35",
   "dir": "ltr",
   "lang": "en",
-  "categories": ["shopping"],
+  "categories": ["shopping", "fashion"],
   "icons": [
     {
       "src": "/icon-192.png",
@@ -27,7 +27,7 @@
   ],
   "shortcuts": [
     {
-      "name": "Shop Beauty",
+      "name": "Shop Shapewear",
       "short_name": "Shop",
       "url": "/shop?source=pwa-shortcut",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]

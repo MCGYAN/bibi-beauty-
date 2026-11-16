@@ -25,9 +25,11 @@ export default function NewsletterSection() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-      <h3 className="font-serif text-3xl md:text-4xl text-brand-plum mb-4">Never Miss a Glow Drop</h3>
-      <p className="text-brand-plum/70 mb-8 max-w-lg mx-auto">
-        Be first to know about new makeup, skincare and offers — beauty that keeps you feeling ready.
+      <h3 className="font-serif text-[1.75rem] md:text-4xl text-brand-plum mb-3 md:mb-4">
+        Join The Shape List
+      </h3>
+      <p className="text-brand-plum/65 text-sm md:text-base mb-6 md:mb-8 max-w-lg mx-auto leading-relaxed">
+        New drops, fit tips and offers: be first when the next silhouette ready piece lands.
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
         <input
@@ -39,11 +41,11 @@ export default function NewsletterSection() {
           className="flex-1 boutique-input !py-3.5 text-center sm:text-left"
         />
         <button type="submit" disabled={isSubmitting} className="boutique-btn-primary disabled:opacity-70">
-          {isSubmitting ? 'Joining…' : 'Join the Glow List'}
+          {isSubmitting ? 'Joining…' : 'Get updates'}
         </button>
       </form>
       {submitStatus === 'success' && (
-        <p className="mt-4 text-sm text-brand-sage font-medium">Welcome to the community!</p>
+        <p className="mt-4 text-sm text-brand-burgundy font-medium">Welcome to ShapewearBoss.</p>
       )}
     </div>
   );

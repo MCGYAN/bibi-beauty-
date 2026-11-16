@@ -23,6 +23,22 @@ await sharp(svg('YOUR_LOGO', '#eff6ff'))
   .png()
   .toFile('public/og-image.png');
 
+const icon = (size, label) =>
+  sharp(
+    Buffer.from(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">
+        <rect width="${size}" height="${size}" fill="#1e293b"/>
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+          font-family="Georgia, serif" font-size="${Math.round(size * 0.28)}" fill="#f8fafc">${label}</text>
+      </svg>`
+    )
+  ).png();
+
+await icon(180, 'YS').toFile('public/apple-touch-icon.png');
+await icon(192, 'YS').toFile('public/icon-192.png');
+await icon(512, 'YS').toFile('public/icon-512.png');
+await icon(32, 'YS').toFile('public/favicon.png');
+
 if (fs.existsSync('public/logo-source.png')) fs.unlinkSync('public/logo-source.png');
 if (fs.existsSync('public/hero.png')) fs.unlinkSync('public/hero.png');
 

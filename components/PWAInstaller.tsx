@@ -68,8 +68,26 @@ export default function PWAInstaller() {
     window.addEventListener('beforeinstallprompt', handleBeforeInstall);
     window.addEventListener('appinstalled', handleInstalled);
 
+    // Skip SW in local development — it caches HTML/JS and fights Fast Refresh
+    const isLocalDev =
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1';
+
+    if ('serviceWorker' in navigator && isLocalDev) {
+      void (async () => {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map((reg) => reg.unregister()));
+        const keys = await caches.keys();
+        await Promise.all(keys.map((key) => caches.delete(key)));
+      })();
+      return () => {
+        window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
+        window.removeEventListener('appinstalled', handleInstalled);
+      };
+    }
+
     // Register service worker with update detection
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && !isLocalDev) {
       navigator.serviceWorker
         .register('/service-worker.js', { scope: '/' })
         .then((registration) => {

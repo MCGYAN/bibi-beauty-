@@ -9,6 +9,8 @@ import {
   BUSINESS_COUNTRY,
   SOCIAL_INSTAGRAM,
   SOCIAL_FACEBOOK,
+  THEME_COLOR,
+  SITE_URL,
 } from '@/lib/site-brand';
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
@@ -20,10 +22,10 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#E2187A',
+  themeColor: THEME_COLOR,
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://example.com';
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || SITE_URL;
 
 // Favicon & OG assets from public
 export const metadata: Metadata = {
@@ -33,7 +35,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
-  keywords: [SITE_NAME, 'makeup Accra', 'skincare Ghana', 'beauty products', BUSINESS_CITY].filter(Boolean),
+  keywords: [SITE_NAME, 'shapewear Ghana', 'waist trainer', 'BBL corset', BUSINESS_CITY].filter(Boolean),
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
@@ -111,12 +113,12 @@ export default function RootLayout({
     <html lang="en-GH">
       <head>
         {/* PWA Meta Tags */}
-        <meta name="theme-color" content="#E2187A" />
+        <meta name="theme-color" content={THEME_COLOR} />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#E2187A" />
+        <meta name="msapplication-TileColor" content={THEME_COLOR} />
         <meta name="msapplication-tap-highlight" content="no" />
 
         {/* FAVICON, add /public/favicon.ico and /public/apple-touch-icon.png */}

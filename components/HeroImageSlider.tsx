@@ -2,11 +2,17 @@
 
 import { useEffect, useState } from 'react';
 
-const INTERVAL_MS = 3000;
+const INTERVAL_MS = 2000;
 
 type Slide = { src: string; alt: string };
 
-export default function HeroImageSlider({ slides }: { slides: readonly Slide[] }) {
+type Props = {
+  slides: readonly Slide[];
+  /** Edge-to-edge media plane (mobile hero). No inset card chrome. */
+  bleed?: boolean;
+};
+
+export default function HeroImageSlider({ slides, bleed = false }: Props) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -18,7 +24,13 @@ export default function HeroImageSlider({ slides }: { slides: readonly Slide[] }
   }, [slides.length]);
 
   return (
-    <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-brand-latte shadow-xl ring-1 ring-brand-rose/20">
+    <div
+      className={
+        bleed
+          ? 'absolute inset-0 overflow-hidden bg-brand-plum'
+          : 'relative aspect-[4/5] rounded-3xl overflow-hidden bg-brand-latte shadow-xl ring-1 ring-brand-rose/20'
+      }
+    >
       {slides.map((slide, i) => (
         <div
           key={slide.src}
@@ -31,18 +43,32 @@ export default function HeroImageSlider({ slides }: { slides: readonly Slide[] }
           <img
             src={slide.src}
             alt={slide.alt}
-            className="absolute inset-0 h-full w-full object-cover object-top"
+            className={`absolute inset-0 h-full w-full object-cover ${bleed ? 'object-center scale-[1.02]' : 'object-top'}`}
             fetchPriority={i === 0 ? 'high' : 'auto'}
           />
         </div>
       ))}
       <div
-        className="absolute inset-0 bg-gradient-to-t from-brand-rose/20 via-transparent to-transparent pointer-events-none z-20"
+        className={
+          bleed
+            ? 'absolute inset-0 bg-gradient-to-t from-brand-plum/85 via-brand-plum/35 to-brand-plum/15 pointer-events-none z-20'
+            : 'absolute inset-0 bg-gradient-to-t from-brand-rose/20 via-transparent to-transparent pointer-events-none z-20'
+        }
         aria-hidden
       />
       {slides.length > 1 && (
-        <div className="absolute bottom-3 left-0 right-0 z-30 flex justify-center">
-          <div className="flex gap-1.5 px-2 py-1.5 rounded-full bg-white/70 backdrop-blur-sm border border-brand-rose/15">
+        <div
+          className={`absolute z-30 flex justify-center ${
+            bleed ? 'bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-0 right-0' : 'bottom-3 left-0 right-0'
+          }`}
+        >
+          <div
+            className={`flex gap-1.5 ${
+              bleed
+                ? 'px-1'
+                : 'px-2 py-1.5 rounded-full bg-white/70 backdrop-blur-sm border border-brand-rose/15'
+            }`}
+          >
             {slides.map((_, i) => (
               <button
                 key={i}
@@ -50,8 +76,14 @@ export default function HeroImageSlider({ slides }: { slides: readonly Slide[] }
                 aria-label={`Show slide ${i + 1}`}
                 aria-current={i === active}
                 onClick={() => setActive(i)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === active ? 'w-6 md:w-8 bg-brand-rose' : 'w-1.5 bg-brand-rose/30'
+                className={`h-1 rounded-full transition-all duration-300 ${
+                  i === active
+                    ? bleed
+                      ? 'w-7 bg-brand-champagne'
+                      : 'w-6 md:w-8 bg-brand-rose'
+                    : bleed
+                      ? 'w-1.5 bg-white/45'
+                      : 'w-1.5 bg-brand-rose/30'
                 }`}
               />
             ))}

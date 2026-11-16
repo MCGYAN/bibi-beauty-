@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 
 type Props = {
   name: string;
@@ -33,10 +32,15 @@ export default function MockProductCard({
     <article className="group flex flex-col h-full boutique-card-hover">
       <Link
         href={productHref}
-        className="relative block aspect-[3/4] rounded-2xl overflow-hidden border border-brand-rose/10 bg-brand-latte/20 mb-3 shadow-sm transition-all duration-500 ease-boutique active:shadow-boutique active:scale-[0.98] boutique-image-zoom md:glass-card md:border-white/40 md:mb-4 md:group-hover:shadow-boutique-glow md:group-hover:border-brand-rose/20"
+        className="relative block aspect-[3/4] rounded-xl md:rounded-2xl overflow-hidden border border-brand-rose/10 bg-brand-latte/20 mb-2.5 shadow-sm transition-all duration-500 ease-boutique active:shadow-boutique active:scale-[0.98] boutique-image-zoom md:glass-card md:border-white/40 md:mb-4 md:group-hover:shadow-boutique-glow md:group-hover:border-brand-rose/20"
       >
         {hasImage ? (
-          <Image src={image} alt={name} fill className="boutique-img-target object-cover object-top" sizes="(max-width: 768px) 50vw, 25vw" />
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={image}
+            alt={name}
+            className="boutique-img-target absolute inset-0 h-full w-full object-cover object-top"
+          />
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-6 m-3 rounded-xl border-2 border-dashed border-brand-rose/25 bg-brand-cream/50">
             <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-rose/70">Featured</span>
@@ -66,22 +70,28 @@ export default function MockProductCard({
         </div>
       </Link>
 
-      <div className="flex flex-col flex-grow px-1">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-brand-sage/90 mb-1.5 transition-colors duration-300 group-hover:text-brand-rose">
+      <div className="flex flex-col flex-grow px-0.5 md:px-1">
+        <p className="text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.2em] md:tracking-[0.24em] text-brand-rose/55 mb-1 md:mb-1.5 transition-colors duration-300 group-hover:text-brand-rose">
           {category}
         </p>
         <Link href={productHref} className="block">
-          <h3 className="font-serif text-lg md:text-xl leading-snug text-brand-plum mb-1 transition-colors duration-300 group-hover:text-brand-rose line-clamp-2">
+          <h3 className="font-serif text-[15px] md:text-xl leading-snug text-brand-plum mb-0.5 md:mb-1 transition-colors duration-300 group-hover:text-brand-rose line-clamp-2">
             {name}
           </h3>
         </Link>
         {tagline && (
-          <p className="text-[11px] text-brand-plum/50 mb-3 leading-relaxed line-clamp-2">{tagline}</p>
+          <p className="hidden md:block text-[11px] text-brand-plum/50 mb-3 leading-relaxed line-clamp-2">
+            {tagline}
+          </p>
         )}
-        <div className="flex items-baseline gap-2 mt-auto pt-1">
-          <span className="font-semibold text-brand-plum tracking-tight">{formatPrice(price)}</span>
+        <div className="flex items-baseline gap-1.5 md:gap-2 mt-auto pt-1">
+          <span className="font-semibold text-[13px] md:text-base text-brand-plum tracking-tight">
+            {formatPrice(price)}
+          </span>
           {onSale && (
-            <span className="text-xs text-brand-plum/40 line-through">{formatPrice(originalPrice!)}</span>
+            <span className="text-[11px] md:text-xs text-brand-plum/40 line-through">
+              {formatPrice(originalPrice!)}
+            </span>
           )}
         </div>
       </div>

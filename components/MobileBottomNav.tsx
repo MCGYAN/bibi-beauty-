@@ -13,13 +13,13 @@ const NAV_ITEMS = [
   {
     href: '/cart',
     label: 'Cart',
-    iconActive: 'ri-shopping-cart-fill',
-    iconInactive: 'ri-shopping-cart-line',
+    iconActive: 'ri-shopping-bag-3-fill',
+    iconInactive: 'ri-shopping-bag-3-line',
     badgeKey: 'cart' as const,
   },
   {
     href: '/wishlist',
-    label: 'Wishlist',
+    label: 'Saved',
     iconActive: 'ri-heart-3-fill',
     iconInactive: 'ri-heart-3-line',
     badgeKey: 'wishlist' as const,
@@ -31,7 +31,6 @@ export default function MobileBottomNav() {
   const pathname = usePathname();
   const { cartCount } = useCart();
   const { wishlistCount } = useWishlist();
-  const [isStandalone, setIsStandalone] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   const isActive = (path: string) => {
@@ -41,23 +40,12 @@ export default function MobileBottomNav() {
 
   useEffect(() => {
     setMounted(true);
-    const standalone =
-      window.matchMedia('(display-mode: standalone)').matches ||
-      (window.navigator as any).standalone === true;
-    setIsStandalone(standalone);
   }, []);
 
   const nav = (
-    <nav
-      className="lg:hidden mobile-bottom-nav-fixed"
-      aria-label="Mobile navigation"
-    >
-      <div className="mobile-bottom-nav-glass border-t border-brand-rose/15">
-        <div
-          className={`grid grid-cols-5 pt-1.5 px-0.5 ${
-            isStandalone ? 'pb-[max(0.35rem,env(safe-area-inset-bottom))]' : 'pb-1.5'
-          }`}
-        >
+    <nav className="lg:hidden mobile-bottom-nav-fixed" aria-label="Mobile navigation">
+      <div className="mobile-bottom-nav-dock px-3 pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-1">
+        <div className="mobile-bottom-nav-glass grid grid-cols-5 rounded-[1.35rem] px-1 py-1 border border-white/50">
           {NAV_ITEMS.map((item) => {
             const active = isActive(item.href);
             const badge =
@@ -67,33 +55,33 @@ export default function MobileBottomNav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center justify-center py-2 min-h-[56px] relative transition-colors active:opacity-80 ${
-                  active ? 'text-brand-plum' : 'text-brand-plum/45'
+                className={`relative flex flex-col items-center justify-center min-h-[52px] rounded-2xl transition-all duration-300 active:scale-95 ${
+                  active ? 'text-brand-rose' : 'text-brand-plum/40'
                 }`}
                 aria-label={item.label}
                 aria-current={active ? 'page' : undefined}
               >
                 {active && (
                   <span
-                    className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-[3px] rounded-full bg-brand-plum"
+                    className="absolute inset-1 rounded-2xl bg-brand-rose/[0.08]"
                     aria-hidden
                   />
                 )}
 
-                <div className="relative flex items-center justify-center w-9 h-9 mt-1">
+                <div className="relative z-[1] flex items-center justify-center w-8 h-8">
                   <i
-                    className={`${active ? item.iconActive : item.iconInactive} text-[23px] leading-none`}
+                    className={`${active ? item.iconActive : item.iconInactive} text-[22px] leading-none`}
                   />
                   {badge > 0 && (
-                    <span className="absolute -top-0.5 -right-2 min-w-[15px] h-[15px] bg-brand-plum text-brand-cream text-[8px] font-bold rounded-full flex items-center justify-center px-0.5">
+                    <span className="absolute -top-0.5 -right-1.5 min-w-[14px] h-[14px] bg-brand-rose text-white text-[8px] font-bold rounded-full flex items-center justify-center px-0.5">
                       {badge > 99 ? '99+' : badge}
                     </span>
                   )}
                 </div>
 
                 <span
-                  className={`text-[10px] font-medium mt-0.5 tracking-wide ${
-                    active ? 'text-brand-plum' : 'text-brand-plum/50'
+                  className={`relative z-[1] text-[9px] font-semibold mt-0.5 tracking-[0.06em] ${
+                    active ? 'text-brand-rose' : 'text-brand-plum/45'
                   }`}
                 >
                   {item.label}

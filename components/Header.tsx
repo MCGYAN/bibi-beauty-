@@ -88,34 +88,36 @@ export default function Header() {
   };
 
   const iconBtn =
-    'h-10 w-10 rounded-full flex items-center justify-center text-brand-plum transition-all duration-300 max-lg:bg-white/70 max-lg:border max-lg:border-brand-rose/15 lg:glass-pill lg:border-white/40 hover:text-brand-rose';
+    'h-10 w-10 rounded-full flex items-center justify-center text-brand-plum transition-all duration-300 max-lg:bg-white/55 max-lg:border max-lg:border-white/40 max-lg:backdrop-blur-md lg:glass-pill lg:border-white/40 hover:text-brand-rose';
 
   const headerContent = (
     <>
       <header
         data-store-header
         className={`store-header-fixed mobile-header-glass safe-area-top transition-all duration-300 lg:duration-500 lg:ease-boutique ${
-          scrolled ? 'lg:glass-frosted lg:border-white/40 lg:shadow-boutique' : 'lg:glass-cream lg:border-brand-rose/20'
+          scrolled
+            ? 'is-scrolled lg:glass-frosted lg:border-white/40 lg:shadow-boutique'
+            : 'lg:glass-cream lg:border-brand-rose/20'
         }`}
       >
         <nav aria-label="Main navigation" className="relative">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Mobile: logo left | search + cart right */}
-            <div className="lg:hidden flex items-center justify-between h-[4.5rem] gap-3">
+            <div className="lg:hidden flex items-center justify-between h-14 gap-3">
               <Link href="/" className="flex shrink-0 select-none" aria-label="Go to homepage">
                 <img
                   src={LOGO_PATH}
                   alt={siteName}
-                  className="h-16 w-auto max-w-[min(62vw,260px)] object-contain object-left"
+                  className="h-11 w-auto max-w-[min(58vw,220px)] object-contain object-left"
                 />
               </Link>
-              <div className="flex items-center justify-end gap-1 shrink-0">
+              <div className="flex items-center justify-end gap-1.5 shrink-0">
                 <button className={iconBtn} onClick={() => setIsSearchOpen(true)} aria-label="Search">
-                  <i className="ri-search-line text-xl" />
+                  <i className="ri-search-line text-lg" />
                 </button>
                 <div className="relative">
                   <button className={iconBtn} onClick={() => setIsCartOpen(!isCartOpen)} aria-label="Cart">
-                    <i className="ri-shopping-bag-3-line text-xl" />
+                    <i className="ri-shopping-bag-3-line text-lg" />
                     {cartCount > 0 && (
                       <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-brand-rose text-[10px] font-bold text-white">
                         {cartCount}
@@ -228,7 +230,7 @@ export default function Header() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Try dresses, tops, sets..."
+                  placeholder="Search waist trainers, BBL, fajas..."
                   className="boutique-input pr-14 text-base"
                   autoFocus
                 />

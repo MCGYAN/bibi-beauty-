@@ -7,7 +7,6 @@ import {
   BUSINESS_ADDRESS,
   ABOUT_HEADLINE,
   ABOUT_BODY,
-  CONTACT_PHONE_DISPLAY,
   WHATSAPP_URL,
 } from '@/lib/site-brand';
 import Link from 'next/link';
@@ -23,27 +22,28 @@ export default function AboutPage() {
 
   const values = [
     {
-      icon: 'ri-sparkling-2-line',
-      title: 'Feel Confident',
+      icon: 'ri-crown-line',
+      title: 'Hourglass Focus',
       description:
-        'Every product is chosen to help you look polished and feel like the best version of yourself — not a different person.',
+        'Every piece is chosen to cinch, lift and smooth so your silhouette looks intentional, not accidental.',
     },
     {
-      icon: 'ri-heart-pulse-line',
-      title: 'Skin That Feels Cared For',
+      icon: 'ri-shirt-line',
+      title: 'Outfit Confidence',
       description:
-        'Skincare that comforts, calms and quietly glows — so beauty starts with how your skin feels.',
+        'You are not just buying underwear. You are buying how a dress sits, how jeans hug, how you walk into a room.',
     },
     {
       icon: 'ri-whatsapp-line',
-      title: 'Easy Ordering',
-      description: `Call ${CONTACT_PHONE_DISPLAY} or WhatsApp us. We help you choose, then deliver nationwide.`,
+      title: 'Social Commerce',
+      description:
+        'See it on TikTok, order on WhatsApp. We help you choose size and style, then deliver nationwide.',
     },
     {
       icon: 'ri-truck-line',
       title: 'Pay On Delivery',
       description:
-        'Shop with peace of mind — nationwide delivery with payment on delivery so you can glow without the stress.',
+        'Shop with peace of mind: nationwide delivery with payment on delivery on eligible orders.',
     },
   ];
 
@@ -65,21 +65,21 @@ export default function AboutPage() {
                   <strong>{siteName}</strong> {ABOUT_BODY}
                 </p>
                 <p>
-                  Rooted in Darkuman, Fadama Junction, we are the beauty stop for Accra women who want real products, honest guidance, and that soft glow that turns an ordinary day into a good one.
+                  Based in {BUSINESS_ADDRESS}, we serve women who want a premium body confidence brand, not a generic underwear shop.
                 </p>
                 <div className="pt-4">
                   <Link
                     href="#our-story"
                     className="inline-flex items-center text-pink-700 font-medium hover:text-pink-800 transition-colors group"
                   >
-                    <span className="border-b border-transparent group-hover:border-pink-800 transition-colors">Read Our Story</span>
+                    <span className="border-b border-transparent group-hover:border-pink-800 transition-colors">See What We Offer</span>
                     <i className="ri-arrow-right-line ml-2 transition-transform group-hover:translate-x-1"></i>
                   </Link>
                 </div>
               </div>
             </div>
             <div className="relative mt-8 lg:mt-0">
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl relative bg-brand-latte">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl relative bg-black">
                 <img
                   src={LOGO_PATH}
                   alt={siteName}
@@ -105,25 +105,25 @@ export default function AboutPage() {
       <section id="our-story" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
           <span className="inline-block text-pink-600 text-xs tracking-[0.24em] uppercase font-bold mb-3">What We Offer</span>
-          <h2 className="text-3xl md:text-4xl font-serif text-gray-900">Beauty For How You Want To Feel</h2>
+          <h2 className="text-3xl md:text-4xl font-serif text-gray-900">Shapewear Built For Curves</h2>
         </div>
         <div className="grid md:grid-cols-2 gap-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
           <div className="bg-pink-50 p-10 rounded-3xl border border-pink-100">
             <div className="w-16 h-16 bg-pink-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg">
-              <i className="ri-palette-line text-3xl text-white"></i>
+              <i className="ri-focus-3-line text-3xl text-white"></i>
             </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Makeup</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Waist &amp; BBL</h3>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Lips, face and eyes that help you show up soft, polished and ready — colour that feels like you on your best day.
+              Waist trainers and BBL corsets that cinch the midsection and enhance hips: the foundation of the hourglass look.
             </p>
           </div>
           <div className="bg-gray-50 p-10 rounded-3xl border border-gray-200">
             <div className="w-16 h-16 bg-gray-900 rounded-2xl flex items-center justify-center mb-8 shadow-lg">
-              <i className="ri-drop-line text-3xl text-white"></i>
+              <i className="ri-t-shirt-line text-3xl text-white"></i>
             </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Skincare &amp; Essentials</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Seamless &amp; Fajas</h3>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Routines and finishing touches that leave skin calm, hydrated and quietly radiant — beauty that starts underneath the glam.
+              Seamless shapewear, bodysuits and fajas that disappear under clothes while sculpting a smoother, stronger silhouette.
             </p>
           </div>
         </div>
@@ -133,7 +133,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Women Choose {siteName}</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Real products. Easy delivery. A glow you can feel.</p>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Femininity. Confidence. Luxury, in how you wear every outfit.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {values.map((value, index) => (
@@ -151,9 +151,9 @@ export default function AboutPage() {
 
       <div className="bg-gradient-to-br from-pink-50 via-white to-pink-50 py-24 border-y border-pink-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-900">
-          <h2 className="text-4xl md:text-5xl font-serif mb-8">Ready To Glow Like You Mean It?</h2>
+          <h2 className="text-4xl md:text-5xl font-serif mb-8">Ready To Shape The Confidence?</h2>
           <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto">
-            Browse makeup and skincare, or WhatsApp us to order — nationwide delivery with pay on delivery.
+            Browse waist trainers, BBL corsets and seamless shapewear, or WhatsApp us to order with pay on delivery.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -164,9 +164,9 @@ export default function AboutPage() {
               <i className="ri-arrow-right-line"></i>
             </Link>
             <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={WHATSAPP_URL || '/contact'}
+              target={WHATSAPP_URL ? '_blank' : undefined}
+              rel={WHATSAPP_URL ? 'noopener noreferrer' : undefined}
               className="inline-flex items-center justify-center gap-3 border-2 border-gray-900 text-gray-900 px-10 py-5 rounded-full font-bold text-lg hover:bg-gray-900 hover:text-white transition-all"
             >
               <i className="ri-whatsapp-line"></i>
